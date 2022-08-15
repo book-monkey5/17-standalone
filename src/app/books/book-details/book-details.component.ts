@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
+import { AsyncPipe, DatePipe, NgForOf, NgIf } from '@angular/common';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { Observable } from 'rxjs';
 
 import { BookStoreService } from '../../shared/book-store.service';
 import { Book } from '../../shared/book';
-import { AsyncPipe, DatePipe, NgForOf, NgIf } from '@angular/common';
 import { IsbnPipe } from '../../shared/isbn.pipe';
 import { LoggedinOnlyDirective } from '../../shared/loggedin-only.directive';
 import { ConfirmDirective } from '../../shared/confirm.directive';

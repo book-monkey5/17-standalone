@@ -1,6 +1,7 @@
 import { NgForOf, NgIf } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { RouterLink, RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
+
 import { IsbnPipe } from '../../shared/isbn.pipe';
 import { Book } from '../../shared/book';
 
