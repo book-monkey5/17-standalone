@@ -1,6 +1,6 @@
 import { NgForOf, NgIf } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { RouterLinkWithHref } from '@angular/router';
 
 import { IsbnPipe } from '../../shared/isbn.pipe';
 import { Book } from '../../shared/book';
@@ -10,7 +10,7 @@ import { Book } from '../../shared/book';
   templateUrl: './book-list-item.component.html',
   styleUrls: ['./book-list-item.component.css'],
   standalone: true,
-  imports: [NgIf, NgForOf, RouterModule, IsbnPipe]
+  imports: [NgIf, NgForOf, RouterLinkWithHref, IsbnPipe]
 })
 export class BookListItemComponent {
   @Input() book?: Book;
