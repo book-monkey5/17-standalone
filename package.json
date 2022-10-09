@@ -20,7 +20,7 @@
     "@angular/platform-browser-dynamic": "^14.2.0",
     "@angular/router": "^14.2.0",
     "angular-date-value-accessor": "^2.0.1",
-    "book-monkey-styles": "^0.13.3",
+    "book-monkey5-styles": "^1.0.0",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
