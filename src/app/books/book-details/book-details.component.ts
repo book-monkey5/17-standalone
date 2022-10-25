@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { AsyncPipe, DatePipe, NgForOf, NgIf } from '@angular/common';
-import { ActivatedRoute, Router, RouterLinkWithHref } from '@angular/router';
+import { AsyncPipe, DatePipe, NgFor, NgIf } from '@angular/common';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Observable } from 'rxjs';
 
 import { BookStoreService } from '../../shared/book-store.service';
@@ -15,7 +15,7 @@ import { ConfirmDirective } from '../../shared/confirm.directive';
   styleUrls: ['./book-details.component.css'],
   standalone: true,
   imports: [
-    NgIf, NgForOf, DatePipe, AsyncPipe, RouterLinkWithHref,
+    NgIf, NgFor, DatePipe, AsyncPipe, RouterLink,
     IsbnPipe, LoggedinOnlyDirective, ConfirmDirective
   ]
 })

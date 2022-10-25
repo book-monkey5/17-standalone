@@ -1,4 +1,4 @@
-import { AsyncPipe, NgForOf, NgIf } from '@angular/common';
+import { AsyncPipe, NgFor, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 
 import { BookStoreService } from '../../shared/book-store.service';
@@ -10,7 +10,7 @@ import { BookListItemComponent } from '../book-list-item/book-list-item.componen
   styleUrls: ['./book-list.component.css'],
   standalone: true,
   imports: [
-    NgIf, NgForOf, AsyncPipe,
+    NgIf, NgFor, AsyncPipe,
     BookListItemComponent
   ]
 })
