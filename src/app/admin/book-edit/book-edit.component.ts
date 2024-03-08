@@ -22,7 +22,7 @@ export class BookEditComponent {
   isbn = input.required<string>()
   book$ = toObservable(this.isbn).pipe(
     switchMap(isbn => this.service.getSingle(isbn))
-  )
+  );
 
   constructor() {
     effect(() => {
