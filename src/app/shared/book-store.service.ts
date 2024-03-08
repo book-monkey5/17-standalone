@@ -6,8 +6,8 @@ import { Book } from './book';
 
 @Injectable({ providedIn: 'root' })
 export class BookStoreService {
-  private readonly apiUrl = 'https://api5.angular-buch.com';
-  private readonly http = inject(HttpClient);
+  private apiUrl = 'https://api5.angular-buch.com';
+  private http = inject(HttpClient);
 
   getAll(): Observable<Book[]> {
     return this.http.get<Book[]>(`${this.apiUrl}/books`).pipe(
