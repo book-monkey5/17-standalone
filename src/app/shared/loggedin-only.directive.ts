@@ -1,5 +1,4 @@
 import { Directive, TemplateRef, ViewContainerRef, effect, inject } from '@angular/core';
-import { Subject } from 'rxjs';
 
 import { AuthService } from './auth.service';
 
@@ -8,8 +7,7 @@ import { AuthService } from './auth.service';
   standalone: true
 })
 export class LoggedinOnlyDirective {
-  private destroy$ = new Subject<void>();
-  private template = inject(TemplateRef<unknown>);
+  private template = inject(TemplateRef);
   private viewContainer = inject(ViewContainerRef);
   private authService = inject(AuthService);
 
