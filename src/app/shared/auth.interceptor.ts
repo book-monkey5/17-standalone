@@ -11,7 +11,7 @@ export function authInterceptor(
   req: HttpRequest<unknown>,
   next: HttpHandlerFn
 ): Observable<HttpEvent<unknown>> {
-  const authService = inject(AuthService)
+  const authService = inject(AuthService);
   const token = '1234567890';
 
   if (authService.isAuthenticated()) {
