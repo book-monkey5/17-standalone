@@ -19,7 +19,7 @@ export class BookFormComponent {
 
   constructor() {
     effect(() => {
-      const bookInput = this.book()
+      const bookInput = this.book();
       if (bookInput) {
         this.setFormValues(bookInput);
         this.setEditMode(true);
