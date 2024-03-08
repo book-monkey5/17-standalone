@@ -1,22 +1,18 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { Injectable, signal } from '@angular/core';
+import { toObservable } from '@angular/core/rxjs-interop';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private _isAuthenticated$ = new BehaviorSubject(true);
-  readonly isAuthenticated$ = this._isAuthenticated$.asObservable();
-
-  get isAuthenticated() {
-    return this._isAuthenticated$.value;
-  }
+  public readonly isAuthenticated = signal(true);
+  readonly isAuthenticated$ = toObservable(this.isAuthenticated);
 
   login() {
-    this._isAuthenticated$.next(true);
+    this.isAuthenticated.set(true);
   }
 
   logout() {
-    this._isAuthenticated$.next(false);
+    this.isAuthenticated.set(false);
   }
 }

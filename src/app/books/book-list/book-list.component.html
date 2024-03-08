@@ -1,9 +1,12 @@
 <h1>Books</h1>
-<ul class="book-list" *ngIf="books$ | async as books">
-  <li *ngFor="let book of books">
+@if (books$ | async; as books) {
+<ul class="book-list">
+  @for (book of books; track book.isbn) {
+  <li>
     <bm-book-list-item [book]="book"></bm-book-list-item>
   </li>
-  <li *ngIf="!books.length">
-    No books available.
-  </li>
+  } @empty {
+  <li>No books available.</li>
+  }
 </ul>
+}

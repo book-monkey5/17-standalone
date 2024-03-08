@@ -1,30 +1,27 @@
-import { Component, Input } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
 import { FormGroupDirective } from '@angular/forms';
 
 @Component({
   selector: 'bm-form-errors',
   templateUrl: './form-errors.component.html',
   styleUrls: ['./form-errors.component.css'],
+  standalone: true
 })
 export class FormErrorsComponent {
-  @Input() controlName?: string;
-  @Input() messages: { [errorCode: string]: string } = {};
+  controlName = input.required<string>();
+  messages = input.required<{ [errorCode: string]: string }>();
 
-  constructor(private form: FormGroupDirective) {}
+  private form = inject(FormGroupDirective)
 
   get errors(): string[] {
-    if (!this.controlName) {
-      return [];
-    }
-
-    const control = this.form.control.get(this.controlName);
+    const control = this.form.control.get(this.controlName());
 
     if (!control || !control.errors || !control.touched) {
       return [];
     }
 
     return Object.keys(control.errors).map(errorCode => {
-      return this.messages[errorCode];
+      return this.messages()[errorCode];
     });
   }
 }

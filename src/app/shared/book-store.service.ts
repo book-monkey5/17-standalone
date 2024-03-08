@@ -1,16 +1,13 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Observable, catchError, of } from 'rxjs';
 
 import { Book } from './book';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class BookStoreService {
-  private apiUrl = 'https://api5.angular-buch.com';
-
-  constructor(private http: HttpClient) {}
+  private readonly apiUrl = 'https://api5.angular-buch.com';
+  private readonly http = inject(HttpClient);
 
   getAll(): Observable<Book[]> {
     return this.http.get<Book[]>(`${this.apiUrl}/books`).pipe(

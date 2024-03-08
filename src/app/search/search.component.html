@@ -1,16 +1,21 @@
 <input type="search"
   autocomplete="off"
   aria-label="Search"
-  [class.loading]="isLoading"
+  [class.loading]="isLoading()"
   #searchInput
   (input)="input$.next(searchInput.value)">
 
-<ul class="search-results" *ngIf="results$ | async as results">
-  <li *ngFor="let book of results">
+@if (results$ | async; as results) {
+<ul class="search-results">
+  @for (book of results; track book.isbn) {
+  <li>
     <a [routerLink]="['/books', book.isbn]">
       {{ book.title }}
       <p role="doc-subtitle">{{ book.subtitle }}</p>
     </a>
   </li>
-  <li *ngIf="!results.length">No results</li>
+  } @empty {
+  <li>No results</li>
+  }
 </ul>
+}

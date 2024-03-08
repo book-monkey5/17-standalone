@@ -1,27 +1,30 @@
-import { Component } from '@angular/core';
+import { AsyncPipe } from '@angular/common';
+import { Component, effect, inject, input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { map, Observable, switchMap } from 'rxjs';
+import { Observable } from 'rxjs';
 
 import { Book } from '../../shared/book';
 import { BookStoreService } from '../../shared/book-store.service';
+import { BookFormComponent } from '../book-form/book-form.component';
 
 @Component({
   selector: 'bm-book-edit',
   templateUrl: './book-edit.component.html',
-  styleUrls: ['./book-edit.component.css']
+  styleUrls: ['./book-edit.component.css'],
+  imports: [AsyncPipe, BookFormComponent],
+  standalone: true
 })
 export class BookEditComponent {
-  book$: Observable<Book>;
+  private service = inject(BookStoreService);
+  private router = inject(Router);
+  private route = inject(ActivatedRoute);
+  book$: Observable<Book> | undefined;
+  isbn = input.required<string>()
 
-  constructor(
-    private service: BookStoreService,
-    private route: ActivatedRoute,
-    private router: Router
-  ) {
-    this.book$ = this.route.paramMap.pipe(
-      map(params => params.get('isbn')!),
-      switchMap(isbn => this.service.getSingle(isbn))
-    );
+  constructor() {
+    effect(() => {
+      this.book$ = this.service.getSingle(this.isbn());
+    })
   }
 
   update(book: Book) {

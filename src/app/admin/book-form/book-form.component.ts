@@ -1,18 +1,33 @@
-import { Component, Output, EventEmitter, Input, OnChanges, inject } from '@angular/core';
-import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, effect, inject, input, OnChanges, output } from '@angular/core';
+import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 import { Book } from '../../shared/book';
+import { FormErrorsComponent } from '../form-errors/form-errors.component';
 import { AsyncValidatorsService } from '../shared/async-validators.service';
 import { atLeastOneValue, isbnFormat } from '../shared/validators';
 
 @Component({
   selector: 'bm-book-form',
   templateUrl: './book-form.component.html',
-  styleUrls: ['./book-form.component.css']
+  styleUrls: ['./book-form.component.css'],
+  imports: [ReactiveFormsModule, FormErrorsComponent],
+  standalone: true
 })
-export class BookFormComponent implements OnChanges {
-  @Input() book?: Book;
-  @Output() submitBook = new EventEmitter<Book>();
+export class BookFormComponent {
+  book = input<Book>();
+  submitBook = output<Book>();
+
+  constructor() {
+    effect(() => {
+      const bookInput = this.book()
+      if (bookInput) {
+        this.setFormValues(bookInput);
+        this.setEditMode(true);
+      } else {
+        this.setEditMode(false);
+      }
+    })
+  }
 
   form = new FormGroup({
     title: new FormControl('', {
@@ -33,15 +48,6 @@ export class BookFormComponent implements OnChanges {
     authors: this.buildAuthorsArray(['']),
     thumbnailUrl: new FormControl('', { nonNullable: true })
   });
-
-  ngOnChanges(): void {
-    if (this.book) {
-      this.setFormValues(this.book);
-      this.setEditMode(true);
-    } else {
-      this.setEditMode(false);
-    }
-  }
 
   private setFormValues(book: Book) {
     this.form.patchValue(book);

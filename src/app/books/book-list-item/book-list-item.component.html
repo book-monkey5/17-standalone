@@ -1,13 +1,19 @@
-<a *ngIf="book" [routerLink]="book.isbn" class="list-item">
-  <img *ngIf="book.thumbnailUrl" [src]="book.thumbnailUrl" alt="Cover">
-  <h2>{{ book.title }}</h2>
-  <p role="doc-subtitle" *ngIf="book.subtitle">
-    {{ book.subtitle }}
+<a [routerLink]="book().isbn" class="list-item">
+  @if(book().thumbnailUrl; as thumbnail) {
+  <img alt="Cover" [ngSrc]="thumbnail" width="120" height="150">
+  }
+  <h2>{{ book().title }}</h2>
+  @if(book().subtitle) {
+  <p role="doc-subtitle">
+    {{ book().subtitle }}
   </p>
+  }
   <ul class="comma-list">
-    <li *ngFor="let author of book.authors">
+    @for (author of book().authors; track author) {
+    <li>
       {{ author }}
     </li>
+    }
   </ul>
-  <div>ISBN {{ book.isbn | isbn }}</div>
+  <div>ISBN {{ book().isbn | isbn }}</div>
 </a>

@@ -1,5 +1,5 @@
-import { AsyncPipe, NgFor, NgIf } from '@angular/common';
-import { Component } from '@angular/core';
+import { AsyncPipe } from '@angular/common';
+import { Component, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { Book } from '../../shared/book';
@@ -12,14 +12,15 @@ import { BookListItemComponent } from '../book-list-item/book-list-item.componen
   styleUrls: ['./book-list.component.css'],
   standalone: true,
   imports: [
-    NgIf, NgFor, AsyncPipe,
+    AsyncPipe,
     BookListItemComponent
   ]
 })
 export class BookListComponent {
   books$: Observable<Book[]>;
+  private service = inject(BookStoreService)
 
-  constructor(private service: BookStoreService) {
+  constructor() {
     this.books$ = this.service.getAll();
   }
 }

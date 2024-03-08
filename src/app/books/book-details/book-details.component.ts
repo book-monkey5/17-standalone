@@ -1,13 +1,13 @@
-import { Component } from '@angular/core';
-import { AsyncPipe, DatePipe, NgFor, NgIf } from '@angular/common';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { AsyncPipe, DatePipe, NgOptimizedImage } from '@angular/common';
+import { Component, effect, inject, input, Input } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
 import { Observable } from 'rxjs';
 
-import { BookStoreService } from '../../shared/book-store.service';
 import { Book } from '../../shared/book';
+import { BookStoreService } from '../../shared/book-store.service';
+import { ConfirmDirective } from '../../shared/confirm.directive';
 import { IsbnPipe } from '../../shared/isbn.pipe';
 import { LoggedinOnlyDirective } from '../../shared/loggedin-only.directive';
-import { ConfirmDirective } from '../../shared/confirm.directive';
 
 @Component({
   selector: 'bm-book-details',
@@ -15,20 +15,25 @@ import { ConfirmDirective } from '../../shared/confirm.directive';
   styleUrls: ['./book-details.component.css'],
   standalone: true,
   imports: [
-    NgIf, NgFor, DatePipe, AsyncPipe, RouterLink,
-    IsbnPipe, LoggedinOnlyDirective, ConfirmDirective
+    DatePipe,
+    AsyncPipe,
+    NgOptimizedImage,
+    RouterLink,
+    IsbnPipe,
+    LoggedinOnlyDirective,
+    ConfirmDirective
   ]
 })
 export class BookDetailsComponent {
-  book$: Observable<Book>;
+  private service = inject(BookStoreService);
+  private router = inject(Router);
+  book$: Observable<Book> | undefined;
+  isbn = input.required<string>()
 
-  constructor(
-    private service: BookStoreService,
-    private route: ActivatedRoute,
-    private router: Router
-  ) {
-    const isbn = this.route.snapshot.paramMap.get('isbn')!;
-    this.book$ = this.service.getSingle(isbn);
+  constructor() {
+    effect(() => {
+      this.book$ = this.service.getSingle(this.isbn());
+    })
   }
 
   removeBook(isbn: string) {
