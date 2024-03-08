@@ -26,7 +26,7 @@ export class BookFormComponent {
       } else {
         this.setEditMode(false);
       }
-    })
+    });
   }
 
   form = new FormGroup({
