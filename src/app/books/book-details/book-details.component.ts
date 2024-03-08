@@ -30,7 +30,7 @@ export class BookDetailsComponent {
   isbn = input.required<string>()
   book$ = toObservable(this.isbn).pipe(
     switchMap(isbn => this.service.getSingle(isbn))
-  )
+  );
 
   removeBook(isbn: string) {
     this.service.remove(isbn).subscribe(() => {
