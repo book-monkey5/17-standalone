@@ -26,7 +26,7 @@ export class SearchComponent {
       distinctUntilChanged(),
       tap(() => this.isLoading.set(true)),
       switchMap(term => this.service.getAllSearch(term)),
-      tap(() =>  this.isLoading.set(false))
+      tap(() => this.isLoading.set(false))
     );
   }
 }
