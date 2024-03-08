@@ -27,7 +27,7 @@ import { LoggedinOnlyDirective } from '../../shared/loggedin-only.directive';
 export class BookDetailsComponent {
   private service = inject(BookStoreService);
   private router = inject(Router);
-  isbn = input.required<string>()
+  isbn = input.required<string>();
   book$ = toObservable(this.isbn).pipe(
     switchMap(isbn => this.service.getSingle(isbn))
   );
