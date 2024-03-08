@@ -5,7 +5,7 @@ import { toObservable } from '@angular/core/rxjs-interop';
   providedIn: 'root'
 })
 export class AuthService {
-  public readonly isAuthenticated = signal(true);
+ readonly isAuthenticated = signal(true);
   readonly isAuthenticated$ = toObservable(this.isAuthenticated);
 
   login() {
