@@ -20,6 +20,6 @@ export class LoggedinOnlyDirective {
       } else {
         this.viewContainer.clear();
       }
-    })
+    });
   }
 }
