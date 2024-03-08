@@ -1,9 +1,9 @@
 import { AsyncPipe, DatePipe, NgOptimizedImage } from '@angular/common';
-import { Component, effect, inject, input, Input } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
+import { toObservable } from '@angular/core/rxjs-interop';
 import { Router, RouterLink } from '@angular/router';
-import { Observable } from 'rxjs';
+import { switchMap } from 'rxjs';
 
-import { Book } from '../../shared/book';
 import { BookStoreService } from '../../shared/book-store.service';
 import { ConfirmDirective } from '../../shared/confirm.directive';
 import { IsbnPipe } from '../../shared/isbn.pipe';
@@ -27,14 +27,10 @@ import { LoggedinOnlyDirective } from '../../shared/loggedin-only.directive';
 export class BookDetailsComponent {
   private service = inject(BookStoreService);
   private router = inject(Router);
-  book$: Observable<Book> | undefined;
   isbn = input.required<string>()
-
-  constructor() {
-    effect(() => {
-      this.book$ = this.service.getSingle(this.isbn());
-    })
-  }
+  book$ = toObservable(this.isbn).pipe(
+    switchMap(isbn => this.service.getSingle(isbn))
+  )
 
   removeBook(isbn: string) {
     this.service.remove(isbn).subscribe(() => {
