@@ -19,7 +19,7 @@ export class BookEditComponent {
   private service = inject(BookStoreService);
   private router = inject(Router);
   private route = inject(ActivatedRoute);
-  isbn = input.required<string>()
+  isbn = input.required<string>();
   book$ = toObservable(this.isbn).pipe(
     switchMap(isbn => this.service.getSingle(isbn))
   );
