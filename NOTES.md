@@ -21,9 +21,17 @@
 - SearchComponent (`isLoading()`)
 - AuthService Signal-based
 - effect statt ngOnChanges
+- BookListComponent: `toSignal()`
 
 9. Signal Inputs
-10.  Signal Outputs
-11.  `withComponentInputBinding()` (Route param Inputs)
-12. NgOptimizedImage
+10. `withComponentInputBinding()` (Route param Inputs)
+
+- `app.config.ts`
+- `input.required`
+- `toObservable()`
+
+11.  Signal Outputs
+
+
+12.  NgOptimizedImage
 

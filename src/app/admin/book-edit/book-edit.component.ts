@@ -1,7 +1,7 @@
 import { AsyncPipe } from '@angular/common';
-import { Component, effect, inject, input } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
 import { toObservable } from '@angular/core/rxjs-interop';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { switchMap } from 'rxjs';
 
 import { Book } from '../../shared/book';
@@ -18,7 +18,6 @@ import { BookFormComponent } from '../book-form/book-form.component';
 export class BookEditComponent {
   private service = inject(BookStoreService);
   private router = inject(Router);
-  private route = inject(ActivatedRoute);
   isbn = input.required<string>();
   book$ = toObservable(this.isbn).pipe(
     switchMap(isbn => this.service.getSingle(isbn))
