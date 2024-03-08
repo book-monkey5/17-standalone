@@ -1,10 +1,10 @@
-@if (book(); as book) {
+@if(book(); as book) {
 <a [routerLink]="book.isbn" class="list-item">
   @if(book.thumbnailUrl; as thumbnail) {
   <img alt="Cover" [ngSrc]="thumbnail" width="120" height="150">
   }
   <h2>{{ book.title }}</h2>
-  @if(book().subtitle) {
+  @if(book.subtitle) {
   <p role="doc-subtitle">
     {{ book.subtitle }}
   </p>
