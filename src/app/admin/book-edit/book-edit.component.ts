@@ -24,12 +24,6 @@ export class BookEditComponent {
     switchMap(isbn => this.service.getSingle(isbn))
   );
 
-  constructor() {
-    effect(() => {
-      this.book$ = this.service.getSingle(this.isbn());
-    })
-  }
-
   update(book: Book) {
     this.service.update(book).subscribe(updatedBook => {
       this.router.navigate(['/books', updatedBook.isbn]);
