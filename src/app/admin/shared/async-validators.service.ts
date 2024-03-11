@@ -1,15 +1,12 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { AsyncValidatorFn } from '@angular/forms';
 import { map } from 'rxjs';
 
 import { BookStoreService } from '../../shared/book-store.service';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class AsyncValidatorsService {
-
-  constructor(private service: BookStoreService) { }
+  private service = inject(BookStoreService)
 
   isbnExists(): AsyncValidatorFn {
     return (control) => {

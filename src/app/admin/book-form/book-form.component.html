@@ -26,10 +26,11 @@
     + Author
   </button>
   <fieldset formArrayName="authors">
+    @for (a of authors.controls; track a) {
     <input
-      *ngFor="let a of authors.controls; index as i"
-      [attr.aria-label]="'Author ' + i"
-      [formControlName]="i">
+      [attr.aria-label]="'Author ' + $index"
+      [formControlName]="$index">
+    }
   </fieldset>
   <bm-form-errors
     controlName="authors"

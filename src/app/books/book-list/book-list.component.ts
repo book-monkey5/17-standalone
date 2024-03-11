@@ -1,8 +1,6 @@
-import { AsyncPipe, NgFor, NgIf } from '@angular/common';
-import { Component } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component, inject } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 
-import { Book } from '../../shared/book';
 import { BookStoreService } from '../../shared/book-store.service';
 import { BookListItemComponent } from '../book-list-item/book-list-item.component';
 
@@ -11,15 +9,9 @@ import { BookListItemComponent } from '../book-list-item/book-list-item.componen
   templateUrl: './book-list.component.html',
   styleUrls: ['./book-list.component.css'],
   standalone: true,
-  imports: [
-    NgIf, NgFor, AsyncPipe,
-    BookListItemComponent
-  ]
+  imports: [BookListItemComponent]
 })
 export class BookListComponent {
-  books$: Observable<Book[]>;
-
-  constructor(private service: BookStoreService) {
-    this.books$ = this.service.getAll();
-  }
+  books = toSignal(inject(BookStoreService).getAll());
 }
+

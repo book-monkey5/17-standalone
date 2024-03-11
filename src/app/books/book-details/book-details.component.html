@@ -1,27 +1,34 @@
-<div class="details" *ngIf="book$ | async as book">
+@if (book$ | async; as book) {
+<div class="details">
   <h1>{{ book.title }}</h1>
-  <p role="doc-subtitle" *ngIf="book.subtitle">{{ book.subtitle }}</p>
+  @if (book.subtitle) {
+  <p role="doc-subtitle">{{ book.subtitle }}</p>
+  }
   <div class="header">
     <div>
       <h2>Authors</h2>
       <ul>
-        <li *ngFor="let author of book.authors">{{ author }}</li>
+        @for (author of book.authors; track author) {
+        <li>{{ author }}</li>
+        }
       </ul>
     </div>
     <div>
       <h2>ISBN</h2>
       {{ book.isbn | isbn }}
     </div>
-    <div *ngIf="book.published">
+    @if (book.published) {
+    <div>
       <h2>Published</h2>
       {{ book.published | date:'longDate' }}
     </div>
+    }
   </div>
   <h2>Description</h2>
   <p>{{ book.description }}</p>
-  <img *ngIf="book.thumbnailUrl"
-    [src]="book.thumbnailUrl"
-    alt="Cover">
+  @if (book.thumbnailUrl) {
+  <img alt="Cover" [ngSrc]="book.thumbnailUrl" width="200" height="250" priority>
+  }
   <a class="button arrow-left" routerLink="..">Back to list</a>
   <ng-container *bmLoggedinOnly>
     <button class="red" bmConfirm="Remove book?" (confirm)="removeBook(book.isbn)">
@@ -33,3 +40,4 @@
     </a>
   </ng-container>
 </div>
+}
