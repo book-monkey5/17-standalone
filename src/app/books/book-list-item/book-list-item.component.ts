@@ -8,8 +8,7 @@ import { Book } from '../../shared/book';
 @Component({
   selector: 'bm-book-list-item',
   templateUrl: './book-list-item.component.html',
-  styleUrls: ['./book-list-item.component.css'],
-  standalone: true,
+  styleUrl: './book-list-item.component.css',
   imports: [NgIf, NgFor, RouterLink, IsbnPipe]
 })
 export class BookListItemComponent {

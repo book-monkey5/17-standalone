@@ -12,8 +12,7 @@ import { ConfirmDirective } from '../../shared/confirm.directive';
 @Component({
   selector: 'bm-book-details',
   templateUrl: './book-details.component.html',
-  styleUrls: ['./book-details.component.css'],
-  standalone: true,
+  styleUrl: './book-details.component.css',
   imports: [
     NgIf, NgFor, DatePipe, AsyncPipe, RouterLink,
     IsbnPipe, LoggedinOnlyDirective, ConfirmDirective

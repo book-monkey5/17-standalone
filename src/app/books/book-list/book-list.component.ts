@@ -9,8 +9,7 @@ import { BookListItemComponent } from '../book-list-item/book-list-item.componen
 @Component({
   selector: 'bm-book-list',
   templateUrl: './book-list.component.html',
-  styleUrls: ['./book-list.component.css'],
-  standalone: true,
+  styleUrl: './book-list.component.css',
   imports: [
     NgIf, NgFor, AsyncPipe,
     BookListItemComponent
